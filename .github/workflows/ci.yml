@@ -1,0 +1,57 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  push-checks:
+    name: Lint + SCA
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+    
+      - name: Install Dependencies
+        run: npm ci
+      
+      - name: Create Report Folder
+        run: |
+          mkdir -p report
+
+      - name: Run ESLint
+        run: |
+          npm run lint > report/eslint-report.txt || echo "eslint failed" > report/eslint-fail.flag
+
+      - name: Upload ESLint Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eslint-report
+          path: report/eslint-report.txt
+
+      - name: Run npm audit (SCA)
+        run: |
+          npm audit --audit-level=high > report/audit-sca-report.txt || echo "sca failed" > report/sca-fail.flag
+        continue-on-error: true
+
+      - name: Upload Audit Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-sca-report
+          path: report/audit-sca-report.txt
+
+      - name: Fail if any step failed
+        run: |
+          if [ -f report/eslint-fail.flag ] || [ -f report/sca-fail.flag ]; then
+            echo "Some checks failed. Failing job."
+            exit 1
+          fi
