@@ -9,7 +9,9 @@ jobs:
   push-checks:
     name: Lint + SCA
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: app
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -35,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: eslint-report
-          path: report/eslint-report.txt
+          path: app/report/eslint-report.txt
 
       - name: Run npm audit (SCA)
         run: |
@@ -47,7 +49,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: audit-sca-report
-          path: report/audit-sca-report.txt
+          path: app/report/audit-sca-report.txt
 
       - name: Fail if any step failed
         run: |
