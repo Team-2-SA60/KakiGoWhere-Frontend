@@ -9,7 +9,7 @@ name: CD Pipeline
 on:
   push:
     branches:
-      - main
+      - cd
 
 env:
   IMAGE_NAME: kakigowhere-frontend:latest
