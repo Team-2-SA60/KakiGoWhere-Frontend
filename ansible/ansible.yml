@@ -1,0 +1,33 @@
+- name: Deploy KakiGoWhere-Frontend React
+  hosts: web
+  become: yes
+
+  vars:
+    docker_image: "{{ docker_image }}"
+    container_name: frontend
+
+  tasks:
+    - name: Create web directory
+      file:
+        path: /opt/react-web
+        state: directory
+
+    - name: Pull latest image
+      command: docker pull {{ docker_image }}
+      args:
+        chdir: /opt/react-web
+
+    - name: Stop and remove existing container
+      docker_container:
+        name: "{{ container_name }}"
+        state: absent
+      ignore_errors: yes
+
+    - name: Run container
+      docker_container:
+        name: "{{ container_name }}"
+        image: "{{ docker_image }}"
+        state: started
+        restart_policy: always
+        ports:
+          - "80:80"
