@@ -1,10 +1,15 @@
 #### For developing
-1. Install dependencies
+1. Change directory to app
+```
+cd app
+```
+
+2. Install dependencies
 ```
 npm install
 ```
 
-2. Run locally
+3. Run locally (http)
 ```
 npm run dev
 ```
@@ -18,4 +23,20 @@ npm audit --audit-level=high
 2. Lint (ESLint)
 ```
 npm run lint
+```
+
+#### Docker
+1. Build docker image
+```
+docker build -f ../docker/Dockerfile -t kakigowhere-react .
+```
+
+2. Run docker container. Access at (http://localhost:80)
+```
+docker run -d --name frontend -p 80:80 kakigowhere-react
+```
+
+3. Stop and delete docker container
+```
+docker rm -f frontend
 ```
