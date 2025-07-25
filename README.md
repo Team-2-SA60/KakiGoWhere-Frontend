@@ -9,7 +9,7 @@ cd app
 npm install
 ```
 
-3. Run locally
+3. Run locally (http)
 ```
 npm run dev
 ```
@@ -31,9 +31,12 @@ npm run lint
 docker build -f ../docker/Dockerfile -t kakigowhere-react .
 ```
 
-2. Run docker container
+2. Run docker container. Access at (http://localhost:80)
 ```
-docker run -d -p 80:80 kakigowhere-react
+docker run -d --name frontend -p 80:80 kakigowhere-react
 ```
 
-Access at (http://localhost:80)
+3. Stop and delete docker container
+```
+docker rm -f frontend
+```
