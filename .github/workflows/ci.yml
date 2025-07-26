@@ -31,24 +31,17 @@ jobs:
         run: |
           npm run lint > report/eslint-report.txt || echo "eslint failed" > report/eslint-fail.flag
 
-      - name: Upload ESLint Report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: eslint-report
-          path: app/report/eslint-report.txt
-
       - name: Run npm audit (SCA)
         run: |
           npm audit --audit-level=high > report/audit-sca-report.txt || echo "sca failed" > report/sca-fail.flag
         continue-on-error: true
 
-      - name: Upload Audit Report
+      - name: Upload Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: audit-sca-report
-          path: app/report/audit-sca-report.txt
+          name: reports
+          path: app/report/
 
       - name: Fail if any step failed
         run: |
