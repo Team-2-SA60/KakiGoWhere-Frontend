@@ -2,7 +2,13 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 const TouristRoute = () => {
-  const { tourist, loading } = useAuth();
+  const { tourist, loading, checkTourist } = useAuth();
+
+  useEffect(() => {
+    if (loading) {
+      checkTourist();
+    }
+  }, [loading, checkTourist]);
 
   if (loading) return <div>Loading...</div>;
   return tourist ? <Outlet/> : <Navigate to="/login" replace />;
