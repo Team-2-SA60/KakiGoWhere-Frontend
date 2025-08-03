@@ -32,7 +32,7 @@ jobs:
         docker build \
           -f ../docker/Dockerfile \
           -t ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }} \
-          --build-arg VITE_API_URL=${{ secrets.KAKI_DO_URL }} \
+          --build-arg VITE_API_URL=${{ secrets.BASE_URL }} \
           .
 
     - name: Push Docker Image
