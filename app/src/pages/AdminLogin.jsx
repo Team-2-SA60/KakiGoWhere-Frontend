@@ -1,12 +1,41 @@
-import Button from '@mui/material/Button'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import LoginForm from '../components/loginForm';
 
 const AdminLogin = () => {
+    const { loginAdmin, admin } = useAuth();
+    const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isLoading, setLoading] = useState(false);
+    const [errMsg, setErrMsg] = useState(null);
 
-    const [ isLoading, setLoading ] = useState(false);
+    useEffect(() => {
+        if (admin) navigate('/admin/dashboard');
+        // eslint-disable-next-line
+    }, [])
 
-    function handleLogin(e) {
+    const handleLogin = async (e) => {
+        e.preventDefault();
         setLoading(true);
+        setErrMsg(null);
+        try {
+            await loginAdmin(email, password);
+            navigate('/admin/dashboard');
+        } catch (err) {
+            const statusCode = err.response?.status;
+            const errorMessage = err.response?.data;
+            
+            if (statusCode === 400 || statusCode === 401) {
+                // 400 = Invalid email, 401 = Invalid password
+                setErrMsg(errorMessage)
+            };
+
+            console.log(errorMessage);
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -19,28 +48,7 @@ const AdminLogin = () => {
                     <div className="text-center">
                         <span className="text-md md:text-lg font-bold">Administrative Portal</span>
                     </div>
-
-                    <div className="grid grid-cols-12 p-4 place-self-center border border-gray-300 rounded-md shadow-xl gap-5">
-                        <label className="col-span-4 font-bold text-right content-center">Email</label>
-                        <input
-                            type="text"
-                            className="col-span-8 border border-gray-300 rounded px-2 py-1"
-                            placeholder="Enter email"
-                        />
-                        <label className="col-span-4 font-bold text-right content-center">Password</label>
-                        <input
-                            type="text"
-                            className="col-span-8 border border-gray-300 rounded px-2 py-1"
-                            placeholder="Enter password"
-                        />
-                        <Button 
-                            loading={isLoading}
-                            className="col-span-12" 
-                            variant="contained" 
-                            color="primary"
-                            onClick={e => handleLogin()}
-                            >Login</Button>
-                    </div>
+                    <LoginForm handleLogin={handleLogin} setEmail={setEmail} setPassword={setPassword} isLoading={isLoading} errMsg={errMsg} />
                 </div>
             </>
     )
