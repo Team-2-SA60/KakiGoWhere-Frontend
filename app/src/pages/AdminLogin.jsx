@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import LoginForm from '../components/loginForm';
 
 const AdminLogin = () => {
-    const { loginAdmin, admin, checkAdmin } = useAuth();
+    const { loginAdmin, admin } = useAuth();
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,6 +13,7 @@ const AdminLogin = () => {
 
     useEffect(() => {
         if (admin) navigate('/admin/dashboard');
+        // eslint-disable-next-line
     }, [])
 
     const handleLogin = async (e) => {

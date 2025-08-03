@@ -47,4 +47,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// eslint-disable-next-line
 export const useAuth = () => useContext(AuthContext);
