@@ -6,16 +6,14 @@ import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route path='/admin/login' element={<AdminLogin />} />
-          <Route element={<AdminRoute />}>
-            <Route path='/admin/dashboard' element={<AdminDashboard />} />
-          </Route>
-        </Routes>
-      </Router>
-    </>
+    <Router>
+      <Routes>
+        <Route path='/admin/login' element={<AdminLogin />} />
+        <Route element={<AdminRoute />}>
+          <Route path='/admin/dashboard' element={<AdminDashboard />} />
+        </Route>
+      </Routes>
+    </Router>
   )
 }
 

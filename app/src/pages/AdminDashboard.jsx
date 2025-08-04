@@ -1,4 +1,4 @@
-import { Button } from "@mui/material"
+import { Button } from '@material-tailwind/react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from "react-router-dom";
 
@@ -12,12 +12,9 @@ const AdminDashboard = () => {
     }
 
     return (
-        <>
-            <Button 
-                variant="contained" 
-                color="primary" 
-                onClick={handleLogout}>Logout</Button>
-        </>
+        <div className="w-screen">
+            <Button onClick={handleLogout}/>
+        </div>
     )
 }
 
