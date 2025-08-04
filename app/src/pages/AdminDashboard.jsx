@@ -1,7 +1,6 @@
-import { Button } from "@mui/material"
+import { Button } from '@material-tailwind/react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../components/Sidebar";
 
 const AdminDashboard = () => {
     const { logout } = useAuth();
@@ -14,10 +13,7 @@ const AdminDashboard = () => {
 
     return (
         <div className="w-screen">
-            <Sidebar content={<Button 
-                variant="contained" 
-                color="primary" 
-                onClick={handleLogout}>Logout</Button>}/>
+            <Button onClick={handleLogout}/>
         </div>
     )
 }

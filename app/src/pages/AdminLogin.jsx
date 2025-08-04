@@ -8,7 +8,7 @@ const AdminLogin = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isLoading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [errMsg, setErrMsg] = useState(null);
 
     useEffect(() => {
@@ -43,18 +43,16 @@ const AdminLogin = () => {
     }
 
     return (
-            <>
-                <div className="grid grid-cols-1 w-full gap-4 p-4">
-                    <div className="place-content-center">
-                        <img className="w-[300px] md:w-[400px] mx-auto" src="/logo_kaki.png" alt="Logo" />
-                    </div>
+        <div className="grid grid-cols-1 w-full gap-4 p-4">
+            <div className="place-content-center">
+                <img className="w-[300px] md:w-[400px] mx-auto" src="/logo_kaki.png" alt="Logo" />
+            </div>
 
-                    <div className="text-center">
-                        <span className="text-md md:text-lg font-bold">Administrative Portal</span>
-                    </div>
-                    <LoginForm handleLogin={handleLogin} setEmail={setEmail} setPassword={setPassword} isLoading={isLoading} errMsg={errMsg} />
-                </div>
-            </>
+            <div className="text-center">
+                <span className="text-md md:text-lg font-bold">Administrative Portal</span>
+            </div>
+            <LoginForm handleLogin={handleLogin} setEmail={setEmail} setPassword={setPassword} loading={loading} errMsg={errMsg} />
+        </div>
     )
 }
 
