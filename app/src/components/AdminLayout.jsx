@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
       </Drawer>
 
       {/* Main Content Area */}
-      <div className="flex-1 min-w-0 md:ml-[15rem] w-full h-full overflow-auto relative">
+      <div className="flex-1 min-w-0 md:ml-[15rem] w-full h-full overflow-auto relative place-items-center">
         {/* Top bar - hidden for desktop */}
         <div className="absolute top-10 left-[1rem] md:hidden z-20">
           <IconButton variant="text" onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
         </div>
 
         {/* Content */}
-        <div className="p-4 h-full place-items-center">{children}</div>
+        <div className="p-4 h-full w-full max-w-[1200px] place-items-center">{children}</div>
       </div>
     </div>
   );
