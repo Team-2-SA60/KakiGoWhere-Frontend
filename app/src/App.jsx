@@ -3,6 +3,7 @@ import './App.css'
 import AdminLogin from './pages/AdminLogin';
 import AdminRoute from './components/AdminRoute';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminManagePlace from './pages/AdminManagePlace'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route path='/admin/login' element={<AdminLogin />} />
         <Route element={<AdminRoute />}>
           <Route path='/admin/dashboard' element={<AdminDashboard />} />
+          <Route path='/admin/places' element={<AdminManagePlace />} />
         </Route>
       </Routes>
     </Router>

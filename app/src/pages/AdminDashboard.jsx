@@ -1,20 +1,12 @@
-import { Button } from '@material-tailwind/react';
-import { useAuth } from '../context/AuthContext';
-import { useNavigate } from "react-router-dom";
+import Layout from '../components/AdminLayout';
 
 const AdminDashboard = () => {
-    const { logout } = useAuth();
-    const navigate = useNavigate();
-
-    const handleLogout = async () => {
-        await logout();
-        navigate("/admin/login");
-    }
-
+    
     return (
-        <div className="w-screen">
-            <Button onClick={handleLogout}/>
-        </div>
+        <Layout>
+            <h1 className="text-2xl font-bold">Dashboard Page</h1>
+            <p>Welcome to the admin dashboard.</p>
+        </Layout>
     )
 }
 
