@@ -3,7 +3,7 @@ import { FaChartSimple } from "react-icons/fa6";
 import { FaRegMap } from "react-icons/fa";
 import { MdOutlineEvent, MdLogout } from "react-icons/md";
 import { useAuth } from "../context/AuthContext";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
     const { logout } = useAuth();
@@ -32,14 +32,10 @@ const Sidebar = () => {
         }
     ];
 
-    const handleItemClick = () => {
-        
-    }
-
     const ListItems = () => {
         return sideBarItems.map((item) => (
                 <Link to={item.path} key={item.label}>
-                    <ListItem className="place-content-end hover:bg-gray-400">
+                    <ListItem className="place-content-end hover:bg-gray-400 text-brown-900 font-semibold">
                         <span className="mr-2">{item.label}</span>
                         <ListItemPrefix>
                             {item.icon}
@@ -51,7 +47,7 @@ const Sidebar = () => {
     }
 
     return (
-        <Card className="h-screen w-full max-w-[15rem] absolute left-0 p-1 shadow-xl bg-gray-200 shadow-blue-gray-900/5">
+        <Card className="h-screen w-full max-w-[15rem] absolute left-0 p-1 shadow-xl rounded-none bg-cyan-100 shadow-blue-gray-900/5">
             <div className="mb-2 p-4 place-items-end">
                 <img src="/logo_kaki.png" className="w-3/4" alt="KakiGoWhere" />
             </div>

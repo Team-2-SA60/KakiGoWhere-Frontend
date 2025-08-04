@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
-    <div className="flex h-screen w-full">
+    <div className="h-screen w-screen flex">
       {/* Sidebar for desktop */}
       <div className="hidden md:block fixed left-0 top-0 h-full w-[15rem] z-10">
         <Sidebar />
@@ -20,16 +20,16 @@ const Layout = ({ children }) => {
       </Drawer>
 
       {/* Main Content Area */}
-      <div className="flex-1 ml-0 md:ml-[12rem] h-full overflow-auto relative">
+      <div className="flex-1 min-w-0 md:ml-[15rem] w-full h-full overflow-auto relative">
         {/* Top bar - hidden for desktop */}
-        <div className="absolute top-4 left-3 md:hidden p-2 z-20">
+        <div className="absolute top-10 left-[1rem] md:hidden z-20">
           <IconButton variant="text" onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
             {isDrawerOpen ? <HiXMark className="w-8 h-8" /> : <GiHamburgerMenu className="w-8 h-8" />}
           </IconButton>
         </div>
 
         {/* Content */}
-        <div className="p-4 h-full">{children}</div>
+        <div className="p-4 h-full place-items-center">{children}</div>
       </div>
     </div>
   );
