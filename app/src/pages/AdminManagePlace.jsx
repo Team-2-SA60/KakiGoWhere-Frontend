@@ -15,6 +15,8 @@ const AdminManagePlace = () => {
 
     useEffect(() => {
         fetchPlaces();
+
+        // eslint-disable-next-line
     }, [currentPage, search])
 
     async function fetchPlaces() {
