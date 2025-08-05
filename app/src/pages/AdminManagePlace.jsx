@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Layout from "../components/AdminLayout";
-import AdminSearchbar from "../components/AdminSearchbar"
-import { Button, Card, CardFooter, CardHeader, Spinner, Typography } from "@material-tailwind/react";
-import { IoArrowBack, IoArrowForward } from "react-icons/io5";
+import Layout from "../components/admin/AdminLayout";
+import AdminSearchbar from "../components/admin/AdminSearchbar"
+import { Card, CardFooter, CardHeader } from "@material-tailwind/react";
 import api from "../utils/axios";
-import AdminManagePlaceRows from "../components/ManagePlaceRows";
+import AdminManagePlaceRows from "../components/admin/ManagePlaceRows";
+import ManagePlacePageButtons from "../components/admin/ManagePlacePageButtons";
 
 const AdminManagePlace = () => {
     const [places, setPlaces] = useState([]);
@@ -34,7 +34,6 @@ const AdminManagePlace = () => {
         } finally {
             setLoading(false);
         }
-        return;
     }
 
     function buildParams() {
@@ -56,59 +55,43 @@ const AdminManagePlace = () => {
         setCurrentPage(currentPage + value);
     }
 
-    const TABLE_HEAD = ["Name", "Categories", "Status", ""];
+    const col_className = "p-3 border-b border-blue-gray-50 text-sm xl:text-base"
 
     return (
         <Layout>
             <AdminSearchbar setSearch={setSearch} />
-            <Card className="h-fit w-full overflow-auto">
-                <CardHeader floated={false} shadow={false} className="flex items-center justify-between py-2">
+            <Card className="h-fit min-h-[200px] w-full overflow-scroll border border-gray-100 text-base">
+                <CardHeader floated={false} shadow={false} className="flex items-center justify-between p-2 m-1">
                     Page {currentPage + 1} of {totalPages}
-                    <div className="flex gap-2">
-                        <Button variant="outlined" size="sm" onClick={e => { handlePageChange(e, -1) }}>
-                            <IoArrowBack />
-                        </Button>
-                        <Button variant="outlined" size="sm" onClick={e => { handlePageChange(e, 1) }}>
-                            <IoArrowForward />
-                        </Button>
-                    </div>
+                    <ManagePlacePageButtons handlePageChange={handlePageChange} />
                 </CardHeader>
                 <table className="w-full table-auto text-left">
                     <thead>
                         {/* Table headers (declared above in TABLE_HEAD) */}
                         <tr>
-                            {TABLE_HEAD.map((head) => (
-                                <th key={head} className={`border-b border-blue-gray-100 bg-cyan-50 p-3 ${head === "Categories" ? "hidden md:table-cell" : ""}`}>
-                                    <Typography variant="small" color="blue-gray" className="font-semibold leading-none opacity-90">
-                                        {head}
-                                    </Typography>
-                                </th>
-                            ))}
+                            <th className={`${col_className} bg-cyan-50 w-3/5 md:w-1/3`}>
+                                <span className="font-semibold leading-none opacity-90 text-base">Name</span>
+                            </th>
+                            <th className={`${col_className} bg-cyan-50 w-1/3 hidden md:table-cell`}>
+                                <span className="font-semibold leading-none opacity-90 text-base">Categories</span>
+                            </th>
+                            <th className={`${col_className} bg-cyan-50 text-center w-1/5 md:w-1/6`}>
+                                <span className="font-semibold leading-none opacity-90 text-base">Status</span>
+                            </th>
+                            <th className={`${col_className} bg-cyan-50 w-1/5 md:w-1/6`}>
+                                <span className="font-semibold leading-none opacity-90 text-base"></span>
+                            </th>
                         </tr>
                     </thead>
                     <tbody className="w-full">
                         {/* Table rows (each place) */}
-                        {loading ?
-                            <tr>
-                                <td colSpan={4} className="place-items-center p-4">
-                                    <Spinner />
-                                </td>
-                            </tr>
-                            :
-                            <AdminManagePlaceRows places={places} />}
+                        <AdminManagePlaceRows places={places} col_className={col_className} loading={loading} />
                     </tbody>
                 </table>
                 {/* Footer fo pagination */}
-                <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
+                <CardFooter className="flex items-center justify-between p-2 m-1">
                     Page {currentPage + 1} of {totalPages}
-                    <div className="flex gap-2">
-                        <Button variant="outlined" size="sm" onClick={e => { handlePageChange(e, -1) }}>
-                            <IoArrowBack />
-                        </Button>
-                        <Button variant="outlined" size="sm" onClick={e => { handlePageChange(e, 1) }}>
-                            <IoArrowForward />
-                        </Button>
-                    </div>
+                    <ManagePlacePageButtons handlePageChange={handlePageChange} />
                 </CardFooter>
             </Card>
         </Layout>
