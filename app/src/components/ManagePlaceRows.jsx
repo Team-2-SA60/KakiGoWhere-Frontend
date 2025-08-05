@@ -1,12 +1,21 @@
 import { Spinner, Tooltip } from "@material-tailwind/react";
 import { BiSolidEdit } from "react-icons/bi";
 import { IoCheckmark, IoClose } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const AdminManagePlaceRows = ({ places, col_className, loading }) => {
+    const classes = col_className;
+    const navigate = useNavigate();
 
     const concatCategories = (interestCategories) => {
         return interestCategories.map(({ description }) => description).join(", ");
     };
+
+    const handleEditClick = (e, id) => {
+        e.preventDefault();
+        const path = '/admin/place/';
+        navigate(path + id);
+    }
 
     if (loading) {
         return (
@@ -29,16 +38,14 @@ const AdminManagePlaceRows = ({ places, col_className, loading }) => {
     }
 
     return places.map(({ id, name, interestCategories, active }) => {
-        const classes = col_className;
-
         return (
             <tr key={id} className="h-16 hover:bg-gray-200">
                 {/* Place name */}
-                <td className={`${classes} min-w-[10rem]`}>
+                <td className={`${classes}`}>
                     <span className="line-clamp-2 text-black">{name}</span>
                 </td>
                 {/* Place Interest categories */}
-                <td className={`${classes} min-w-[8rem] hidden md:table-cell`}>
+                <td className={`${classes} hidden md:table-cell`}>
                     <span className="line-clamp-2 text-black">
                         {concatCategories(interestCategories)}
                     </span>
@@ -61,7 +68,7 @@ const AdminManagePlaceRows = ({ places, col_className, loading }) => {
                 <td className={`${classes}`}>
                     <div className="flex items-center justify-center gap-5">
                         <Tooltip content="Edit Place" placement="top" className="text-black bg-cyan-100 border-b-2 text-[10px] p-1.5">
-                            <button type="button"><BiSolidEdit className="h-5 w-5" /></button>
+                            <button type="button" className="hover:text-gray-500 hover:scale-110" onClick={e => handleEditClick(e, id)}><BiSolidEdit className="h-5 w-5" /></button>
                         </Tooltip>
                     </div>
                 </td>

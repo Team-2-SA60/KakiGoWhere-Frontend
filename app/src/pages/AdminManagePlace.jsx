@@ -69,16 +69,16 @@ const AdminManagePlace = () => {
                     <thead>
                         {/* Table headers (declared above in TABLE_HEAD) */}
                         <tr>
-                            <th className={`${col_className} bg-cyan-50 w-2/5`}>
+                            <th className={`${col_className} bg-cyan-50 w-3/5 md:w-1/3`}>
                                 <span className="font-semibold leading-none opacity-90 text-base">Name</span>
                             </th>
-                            <th className={`${col_className} bg-cyan-50 w-2/5 hidden md:table-cell`}>
+                            <th className={`${col_className} bg-cyan-50 w-1/3 hidden md:table-cell`}>
                                 <span className="font-semibold leading-none opacity-90 text-base">Categories</span>
                             </th>
-                            <th className={`${col_className} bg-cyan-50 text-center w-1/10`}>
+                            <th className={`${col_className} bg-cyan-50 text-center w-1/5 md:w-1/6`}>
                                 <span className="font-semibold leading-none opacity-90 text-base">Status</span>
                             </th>
-                            <th className={`${col_className} bg-cyan-50 w-1/10`}>
+                            <th className={`${col_className} bg-cyan-50 w-1/5 md:w-1/6`}>
                                 <span className="font-semibold leading-none opacity-90 text-base"></span>
                             </th>
                         </tr>
