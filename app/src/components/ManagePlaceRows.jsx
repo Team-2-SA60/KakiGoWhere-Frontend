@@ -1,13 +1,22 @@
-import { Tooltip } from "@material-tailwind/react";
+import { Spinner, Tooltip } from "@material-tailwind/react";
 import { BiSolidEdit } from "react-icons/bi";
-import { FaCalendarPlus } from "react-icons/fa6";
 import { IoCheckmark, IoClose } from "react-icons/io5";
 
-const AdminManagePlaceRows = ({ places }) => {
+const AdminManagePlaceRows = ({ places, col_className, loading }) => {
 
     const concatCategories = (interestCategories) => {
         return interestCategories.map(({ description }) => description).join(", ");
     };
+
+    if (loading) {
+        return (
+            <tr>
+                <td colSpan={4} className="place-items-center p-4 h-screen">
+                    <Spinner />
+                </td>
+            </tr>
+        )
+    }
 
     if (places.length == 0) {
         return (
@@ -19,20 +28,22 @@ const AdminManagePlaceRows = ({ places }) => {
         )
     }
 
-    return places.map(({ id, name, interestCategories, active }, index) => {
-        const isLast = index === places.length - 1;
-        const classes = isLast ? "p-3" : "p-3 border-b border-blue-gray-50";
+    return places.map(({ id, name, interestCategories, active }) => {
+        const classes = col_className;
 
         return (
-            <tr key={id} className="h-20 hover:bg-gray-200">
+            <tr key={id} className="h-16 hover:bg-gray-200">
+                {/* Place name */}
                 <td className={`${classes} min-w-[10rem]`}>
-                    <span className="line-clamp-2 text-black text-sm">{name}</span>
+                    <span className="line-clamp-2 text-black">{name}</span>
                 </td>
+                {/* Place Interest categories */}
                 <td className={`${classes} min-w-[8rem] hidden md:table-cell`}>
-                    <span className="line-clamp-2 text-black text-sm">
+                    <span className="line-clamp-2 text-black">
                         {concatCategories(interestCategories)}
                     </span>
                 </td>
+                {/* Place status */}
                 <td className={`${classes}`}>
                     <span className="text-xl flex justify-center">
                         {active ?
@@ -46,13 +57,11 @@ const AdminManagePlaceRows = ({ places }) => {
                         }
                     </span>
                 </td>
+                {/* Buttons to edit or create new event for place */}
                 <td className={`${classes}`}>
-                    <div className="flex items-center gap-5">
+                    <div className="flex items-center justify-center gap-5">
                         <Tooltip content="Edit Place" placement="top" className="text-black bg-cyan-100 border-b-2 text-[10px] p-1.5">
                             <button type="button"><BiSolidEdit className="h-5 w-5" /></button>
-                        </Tooltip>
-                        <Tooltip content="Add Event" placement="top" className="text-black bg-cyan-100 border-b-2 text-[10px] p-1.5">
-                            <button type="button"><FaCalendarPlus className="h-4 w-4" /></button>
                         </Tooltip>
                     </div>
                 </td>
