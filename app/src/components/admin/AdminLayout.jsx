@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Drawer, IconButton } from "@material-tailwind/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiXMark } from "react-icons/hi2";
-import Sidebar from "./Sidebar";
+import Sidebar from "../Sidebar";
 
 const Layout = ({ children }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

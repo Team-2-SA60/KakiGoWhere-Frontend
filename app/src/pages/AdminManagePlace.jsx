@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Layout from "../components/AdminLayout";
-import AdminSearchbar from "../components/AdminSearchbar"
+import Layout from "../components/admin/AdminLayout";
+import AdminSearchbar from "../components/admin/AdminSearchbar"
 import { Card, CardFooter, CardHeader } from "@material-tailwind/react";
 import api from "../utils/axios";
-import AdminManagePlaceRows from "../components/ManagePlaceRows";
-import ManagePlacePageButtons from "../components/ManagePlacePageButtons";
+import AdminManagePlaceRows from "../components/admin/ManagePlaceRows";
+import ManagePlacePageButtons from "../components/admin/ManagePlacePageButtons";
 
 const AdminManagePlace = () => {
     const [places, setPlaces] = useState([]);
