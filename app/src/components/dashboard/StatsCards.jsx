@@ -1,4 +1,4 @@
-import { Card, CardBody } from "@material-tailwind/react";
+import { Card } from "@material-tailwind/react";
 
 export default function StatsCards({ stats }) {
     return (
