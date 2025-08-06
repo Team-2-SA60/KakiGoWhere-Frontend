@@ -3,7 +3,7 @@ import { BiSolidEdit } from "react-icons/bi";
 import { IoCheckmark, IoClose } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-const AdminManagePlaceRows = ({ places, col_className, loading }) => {
+const AdminManagePlaceRows = ({ place, col_className, loading }) => {
     const classes = col_className;
     const navigate = useNavigate();
 
@@ -19,41 +19,42 @@ const AdminManagePlaceRows = ({ places, col_className, loading }) => {
 
     if (loading) {
         return (
-            <tr>
-                <td colSpan={4} className="place-items-center p-4 h-screen">
-                    <Spinner />
-                </td>
+            <tr className="h-16">
+                {Array.from({ length:4 }).map((_, i) => (
+                    <td className="place-items-center">
+                        <Spinner />
+                    </td>
+                ))}
             </tr>
         )
     }
 
-    if (places.length == 0) {
+    if (place.length == 0) {
         return (
             <tr>
-                <td colSpan={4} className="text-center p-4">
+                <td className="text-center p-4">
                     No places found
                 </td>
             </tr>
         )
     }
 
-    return places.map(({ id, name, interestCategories, active }) => {
         return (
-            <tr key={id} className="h-16 hover:bg-gray-200">
+            <tr key={place.id} className="h-16 hover:bg-gray-200">
                 {/* Place name */}
                 <td className={`${classes}`}>
-                    <span className="line-clamp-2 text-black">{name}</span>
+                    <span className="line-clamp-2 text-black">{place.name}</span>
                 </td>
                 {/* Place Interest categories */}
                 <td className={`${classes} hidden md:table-cell`}>
                     <span className="line-clamp-2 text-black">
-                        {concatCategories(interestCategories)}
+                        {concatCategories(place.interestCategories)}
                     </span>
                 </td>
                 {/* Place status */}
                 <td className={`${classes}`}>
                     <span className="text-xl flex justify-center">
-                        {active ?
+                        {place.active ?
                             <Tooltip content="Open" placement="top" className="text-black bg-cyan-100 border-b-2 text-[10px] p-1.5">
                                 <IoCheckmark />
                             </Tooltip>
@@ -74,7 +75,6 @@ const AdminManagePlaceRows = ({ places, col_className, loading }) => {
                 </td>
             </tr>
         );
-    })
 }
 
 export default AdminManagePlaceRows
