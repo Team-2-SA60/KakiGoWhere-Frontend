@@ -70,7 +70,7 @@ const AdminManagePlace = () => {
                         {/* Table headers (declared above in TABLE_HEAD) */}
                         <tr>
                             <th className={`${col_className} bg-cyan-50 w-3/5 md:w-1/3`}>
-                                <span className="font-semibold leading-none opacity-90 text-base">Name</span>
+                                <span className="font-semibold leading-none opacity-90 text-base">Place name</span>
                             </th>
                             <th className={`${col_className} bg-cyan-50 w-1/3 hidden md:table-cell`}>
                                 <span className="font-semibold leading-none opacity-90 text-base">Categories</span>
