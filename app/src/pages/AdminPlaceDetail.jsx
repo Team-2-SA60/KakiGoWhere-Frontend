@@ -44,7 +44,6 @@ const AdminPlaceDetail = () => {
             <Card className="ml-[2rem] md:ml-[4rem] w-[85%] h-fit flex mt-3 border border-gray-200">
                 <div className="w-full p-2">
                     <div className="flex">
-                        {/* Name */}
                         <AdminPlaceDetailForm place={place} setPlace={setPlace} edit={edit} />
                     </div>
                 </div>
