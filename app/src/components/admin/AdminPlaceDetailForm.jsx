@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useImperativeHandle, useState, forwardRef } from "react";
 import { RxCross1, RxPlus } from "react-icons/rx";
 import InterestCategoriesModal from "../InterestCategoriesModal";
+import { Option, Select } from "@material-tailwind/react";
 
-const AdminPlaceDetailForm = ({ place, setPlace, edit }) => {
+const AdminPlaceDetailForm = forwardRef(({ place, setPlace, edit }, ref) => {
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
     const [description, setDescription] = useState("");
@@ -34,12 +35,24 @@ const AdminPlaceDetailForm = ({ place, setPlace, edit }) => {
         setOpeningHours(place.openingHours);
     }
 
-    const handleNameChange = (name) => {
-        setPlace(place => ({
-            ...place,
-            name: name
-        }));
-    };
+    useImperativeHandle(ref, () => ({
+        updateDetails: () => {
+            const updatedPlace = {
+                ...place,
+                name,
+                address,
+                description,
+                latitude,
+                longitude,
+                url,
+                interestCategories: categories,
+                active,
+            };
+            console.log("Submit Place Data", updatedPlace);
+            setPlace(updatedPlace);
+            return updatedPlace;
+        }
+    }));
 
     const handleCategoriesModal = () => setOpenCategoriesModal(!openCategoriesModal);
     const handleOpeningHoursModal = () => setOpenOpeningHoursModal(!openOpeningHoursModal);
@@ -72,7 +85,7 @@ const AdminPlaceDetailForm = ({ place, setPlace, edit }) => {
 
     return (
         <>
-            <form className="w-full max-w-lg">
+            <form className="w-full">
                 <div className="flex flex-wrap -mx-1 gap-5 md:p-2">
                     {/* Place name */}
                     <div className="flex w-full place-items-center gap-2">
@@ -146,27 +159,39 @@ const AdminPlaceDetailForm = ({ place, setPlace, edit }) => {
                             </button>
                         </div>
                     </div>
-                    {/* Status (Active) */}
                     <div className="flex w-full place-items-center gap-2">
-                        <span className="block uppercase min-w-[5rem] text-gray-800 text-xs font-semibold text-right md:text-nowrap">Status</span>
-                        <select className="outline-none border w-1/3 min-h-[2rem] p-1 rounded-md bg-gray-200 focus:bg-transparent"
-                            onChange={e => handleChangeActive(e.target.value)}
-                            value={active ? "Open" : "Closed"}
-                            disabled={edit}>
-                                <option value="Open">Open</option>
-                                <option value="Closed">Closed</option>
-                        </select>
+                        {/* Status (Active) */}
+                        <div className="flex-row w-1/2">
+                            <span className="block uppercase min-w-[5rem] mb-1 text-gray-800 text-xs font-semibold text-center md:text-nowrap">Status</span>
+
+                            <div className="w-full">
+                                <Select
+                                    className="outline-none ring-0 border border-gray-300 rounded-md bg-gray-200 focus:bg-transparent"
+                                    onChange={(value) => handleChangeActive(value)}
+                                    label="Select"
+                                    value={active ? "Open" : "Closed"}
+                                    disabled={edit}>
+                                    <Option value="Open">Open</Option>
+                                    <Option value="Closed">Closed</Option>
+                                </Select>
+                            </div>
+                        </div>
+
+                        {/* Open Opening hours modal */}
+                        <div className="flex-row w-1/2">
+                            
+                        </div>
                     </div>
                 </div>
             </form>
             {/* Select interestCategories modal */}
-            <InterestCategoriesModal 
-                openCategoriesModal={openCategoriesModal} 
-                handleCategoriesModal={handleCategoriesModal} 
-                categories={categories} 
+            <InterestCategoriesModal
+                openCategoriesModal={openCategoriesModal}
+                handleCategoriesModal={handleCategoriesModal}
+                categories={categories}
                 setCategories={setCategories} />
         </>
     )
-}
+})
 
 export default AdminPlaceDetailForm;
