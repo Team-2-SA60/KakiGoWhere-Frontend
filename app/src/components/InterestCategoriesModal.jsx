@@ -59,8 +59,8 @@ const InterestCategoriesModal = ({ openCategoriesModal, handleCategoriesModal, c
         return <Spinner />;
     }
 
-    const ListCategories = () => {
-        return allCategories.map((category) => {
+    const ListCategories = () => (
+        allCategories.map((category) => {
             return (
                 <button type="button" key={category.id}
                     className={`flex text-center place-items-center align-middle gap-1 border border-cyan-100 px-2 py-1 rounded-2xl transition-all duration-300
@@ -70,7 +70,7 @@ const InterestCategoriesModal = ({ openCategoriesModal, handleCategoriesModal, c
                 </button>
             )
         })
-    }
+    )
 
     return (
         <Dialog open={openCategoriesModal} handler={handleCategoriesModal}>

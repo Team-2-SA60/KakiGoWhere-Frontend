@@ -1,7 +1,9 @@
 import { useEffect, useImperativeHandle, useState, forwardRef } from "react";
 import { RxCross1, RxPlus } from "react-icons/rx";
 import InterestCategoriesModal from "../InterestCategoriesModal";
-import { Option, Select } from "@material-tailwind/react";
+import OpeningHoursView from "./OpeningHoursView";
+import { Spinner } from "@material-tailwind/react";
+import OpeningHoursModal from "./OpeningHoursModal";
 
 const AdminPlaceDetailForm = forwardRef(({ place, setPlace, edit }, ref) => {
     const [name, setName] = useState("");
@@ -12,6 +14,7 @@ const AdminPlaceDetailForm = forwardRef(({ place, setPlace, edit }, ref) => {
     const [url, setUrl] = useState("");
     const [categories, setCategories] = useState([]);
     const [active, setActive] = useState(false);
+    const [autoFetch, setAutoFetch] = useState(false);
     const [openingHours, setOpeningHours] = useState([]);
     const [openCategoriesModal, setOpenCategoriesModal] = useState(false);
     const [openOpeningHoursModal, setOpenOpeningHoursModal] = useState(false);
@@ -30,15 +33,15 @@ const AdminPlaceDetailForm = forwardRef(({ place, setPlace, edit }, ref) => {
         setLongitude(place.longitude);
         setUrl(place.url);
         setCategories(place.interestCategories);
-
         setActive(place.active);
+        setAutoFetch(place.autoFetch);
         setOpeningHours(place.openingHours);
     }
 
     useImperativeHandle(ref, () => ({
         updateDetails: () => {
             const updatedPlace = {
-                ...place,
+                id: place.id,
                 name,
                 address,
                 description,
@@ -47,6 +50,7 @@ const AdminPlaceDetailForm = forwardRef(({ place, setPlace, edit }, ref) => {
                 url,
                 interestCategories: categories,
                 active,
+                autoFetch
             };
             console.log("Submit Place Data", updatedPlace);
             setPlace(updatedPlace);
@@ -83,10 +87,24 @@ const AdminPlaceDetailForm = forwardRef(({ place, setPlace, edit }, ref) => {
         }
     }
 
+    const handleChangeAutoFetch = (active) => {
+        if (active === "Open") {
+            setActive(true);
+        } else {
+            setActive(false);
+        }
+    }
+
+    if (!place) {
+        return (
+            <Spinner />
+        )
+    }
+
     return (
         <>
             <form className="w-full">
-                <div className="flex flex-wrap -mx-1 gap-5 md:p-2">
+                <div className="flex flex-wrap -mx-1 gap-5 md:gap-8 md:p-2">
                     {/* Place name */}
                     <div className="flex w-full place-items-center gap-2">
                         <span className="block uppercase min-w-[5rem] text-gray-800 text-xs font-semibold text-right md:text-nowrap">Place Name</span>
@@ -131,7 +149,7 @@ const AdminPlaceDetailForm = forwardRef(({ place, setPlace, edit }, ref) => {
                     <div className="flex w-full place-items-center gap-2">
                         {/* latitude */}
                         <div className="flex-row w-1/2">
-                            <span className="block uppercase min-w-[5rem] mb-1 text-gray-800 text-xs font-semibold text-left md:text-nowrap">Latitude</span>
+                            <span className="block uppercase min-w-[5rem] mb-1 text-gray-800 text-xs font-semibold text-center md:text-nowrap">Latitude</span>
                             <input className="outline-none border w-full min-h-[2rem] p-1 rounded-md bg-gray-200 focus:bg-transparent"
                                 type="text"
                                 value={latitude}
@@ -140,12 +158,33 @@ const AdminPlaceDetailForm = forwardRef(({ place, setPlace, edit }, ref) => {
                         </div>
                         {/* longitude */}
                         <div className="flex-row w-1/2">
-                            <span className="block uppercase min-w-[5rem] mb-1 text-gray-800 text-xs font-semibold text-left md:text-nowrap">Longitude</span>
+                            <span className="block uppercase min-w-[5rem] mb-1 text-gray-800 text-xs font-semibold text-center md:text-nowrap">Longitude</span>
                             <input className="outline-none border w-full min-h-[2rem] p-1 rounded-md bg-gray-200 focus:bg-transparent"
                                 type="text"
                                 value={longitude}
                                 onChange={e => { setLongitude(e.target.value) }}
                                 disabled={edit} />
+                        </div>
+                    </div>
+                    {/* Status (active) and AutoFetch toggles */}
+                    <div className="flex w-full place-content-center gap-2">
+                        {/* Status */}
+                        <div className="flex-row w-1/2 gap-2 place-items-center align-middle">
+                            <span className="block uppercase min-w-[5rem] mb-1 text-gray-800 text-xs font-semibold text-center md:text-nowrap">Status</span>
+                            <button type="button" 
+                                className={`w-full text-sm border px-4 py-1 transition-all ease-in-out duration-200 rounded-md bg-gray-200 hover:border-green-200 ${active ? "bg-green-300" : ""}`}
+                                onClick={e => {setActive(!active)}}>
+                                    {active ? "Open" : "Closed"}
+                            </button>
+                        </div>
+                        {/* AutoFetch */}
+                        <div className="flex-row w-1/2 gap-2 place-items-center align-middle">
+                            <span className="block uppercase min-w-[5rem] mb-1 text-gray-800 text-xs font-semibold text-center md:text-nowrap">Automatic Update</span>
+                            <button type="button" 
+                                className={`w-full text-sm border px-4 py-1 transition-all ease-in-out duration-200 rounded-md bg-gray-200 hover:border-green-200 ${autoFetch ? "bg-green-300" : ""}`}
+                                onClick={e => {setAutoFetch(!autoFetch)}}>
+                                    {autoFetch ? "Enabled" : "Disabled"}
+                            </button>
                         </div>
                     </div>
                     {/* Categories */}
@@ -159,37 +198,35 @@ const AdminPlaceDetailForm = forwardRef(({ place, setPlace, edit }, ref) => {
                             </button>
                         </div>
                     </div>
+                    {/* OpeningHours */}
                     <div className="flex w-full place-items-center gap-2">
-                        {/* Status (Active) */}
-                        <div className="flex-row w-1/2">
-                            <span className="block uppercase min-w-[5rem] mb-1 text-gray-800 text-xs font-semibold text-center md:text-nowrap">Status</span>
-
-                            <div className="w-full">
-                                <Select
-                                    className="outline-none ring-0 border border-gray-300 rounded-md bg-gray-200 focus:bg-transparent"
-                                    onChange={(value) => handleChangeActive(value)}
-                                    label="Select"
-                                    value={active ? "Open" : "Closed"}
-                                    disabled={edit}>
-                                    <Option value="Open">Open</Option>
-                                    <Option value="Closed">Closed</Option>
-                                </Select>
-                            </div>
+                        <div>
+                            <span className="block uppercase min-w-[5rem] text-gray-800 text-xs font-semibold text-right">
+                                Opening Hours
+                            </span>
+                            <button type="button" className="border border-cyan-100 w-full place-items-center bg-gray-100 mt-2 px-2 py-1 rounded-2xl text-sm text-gray-600 hover:text-cyan-600 hover:bg-transparent transition-all duration-300 active:bg-cyan-100"
+                                onClick={handleOpeningHoursModal}>
+                                Edit
+                            </button>
                         </div>
-
-                        {/* Open Opening hours modal */}
-                        <div className="flex-row w-1/2">
-                            
+                        <div className="w-full">
+                            <OpeningHoursView openingHours={openingHours}/>
                         </div>
                     </div>
                 </div>
             </form>
-            {/* Select interestCategories modal */}
+            {/* Open interestCategories modal */}
             <InterestCategoriesModal
                 openCategoriesModal={openCategoriesModal}
                 handleCategoriesModal={handleCategoriesModal}
                 categories={categories}
                 setCategories={setCategories} />
+            {/* Open openingHours modal */}
+            <OpeningHoursModal
+                openOpeningHoursModal={openOpeningHoursModal}
+                handleOpeningHoursModal={handleOpeningHoursModal}
+                openingHours={openingHours}
+                setOpeningHours={setOpeningHours} />
         </>
     )
 })

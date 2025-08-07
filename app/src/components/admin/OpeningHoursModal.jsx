@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { Button, Dialog, DialogFooter, DialogHeader } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
 
 const OpeningHoursModal = ({ openOpeningHoursModal, handleOpeningHoursModal, openingHours, setOpeningHours }) => {
-    
     const [newOpeningHours, setNewOpeningHours] = useState([]);
+    const dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
     useEffect(() => {
         setNewOpeningHours(openingHours);
@@ -25,7 +26,7 @@ const OpeningHoursModal = ({ openOpeningHoursModal, handleOpeningHoursModal, ope
                 >
                     <span>Cancel</span>
                 </Button>
-                <Button variant="gradient" color="green" onClick={handleConfirm}>
+                <Button variant="gradient" color="green">
                     <span>Confirm</span>
                 </Button>
             </DialogFooter>

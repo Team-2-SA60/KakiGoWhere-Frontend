@@ -22,14 +22,14 @@ const Layout = ({ children }) => {
       {/* Main Content Area */}
       <div className="flex-1 min-w-0 md:ml-[15rem] w-full h-full overflow-auto relative place-items-center">
         {/* Top bar - hidden for desktop */}
-        <div className="absolute top-10 left-[1rem] md:hidden z-20">
+        <div className="absolute top-[1rem] left-[1rem] md:hidden z-20">
           <IconButton variant="text" onClick={() => setIsDrawerOpen(!isDrawerOpen)}>
             {isDrawerOpen ? <HiXMark className="w-8 h-8" /> : <GiHamburgerMenu className="w-8 h-8" />}
           </IconButton>
         </div>
 
         {/* Content */}
-        <div className="p-4 h-full w-full max-w-[1200px] place-items-center">{children}</div>
+        <div className="px-4 h-full w-full max-w-[1200px] place-items-center">{children}</div>
       </div>
     </div>
   );

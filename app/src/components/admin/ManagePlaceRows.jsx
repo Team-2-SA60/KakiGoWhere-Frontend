@@ -21,7 +21,7 @@ const AdminManagePlaceRows = ({ place, col_className, loading }) => {
         return (
             <tr className="h-16">
                 {Array.from({ length:4 }).map((_, i) => (
-                    <td className="place-items-center">
+                    <td key={i} className="place-items-center">
                         <Spinner />
                     </td>
                 ))}
@@ -69,7 +69,7 @@ const AdminManagePlaceRows = ({ place, col_className, loading }) => {
                 <td className={`${classes}`}>
                     <div className="flex items-center justify-center gap-5">
                         <Tooltip content="Edit Place" placement="top" className="text-black bg-cyan-100 border-b-2 text-[10px] p-1.5">
-                            <button type="button" className="hover:text-gray-500 hover:scale-110" onClick={e => handleEditClick(e, id)}><BiSolidEdit className="h-5 w-5" /></button>
+                            <button type="button" className="hover:text-gray-500 hover:scale-110" onClick={e => handleEditClick(e, place.id)}><BiSolidEdit className="h-5 w-5" /></button>
                         </Tooltip>
                     </div>
                 </td>
