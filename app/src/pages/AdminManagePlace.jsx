@@ -60,17 +60,17 @@ const AdminManagePlace = () => {
     return (
         <Layout>
             <AdminSearchbar setSearch={setSearch} />
-            <Card className="h-fit min-h-[200px] w-full overflow-scroll border border-gray-100 text-base">
+            <Card className="h-fit min-h-[200px] w-full overflow-auto border border-gray-100 text-base">
                 <CardHeader floated={false} shadow={false} className="flex items-center justify-between p-2 m-1">
                     Page {currentPage + 1} of {totalPages}
                     <ManagePlacePageButtons handlePageChange={handlePageChange} />
                 </CardHeader>
-                <table className="w-full table-auto text-left">
+                <table className="w-full table-fixed text-left">
                     <thead>
                         {/* Table headers (declared above in TABLE_HEAD) */}
                         <tr>
                             <th className={`${col_className} bg-cyan-50 w-3/5 md:w-1/3`}>
-                                <span className="font-semibold leading-none opacity-90 text-base">Name</span>
+                                <span className="font-semibold leading-none opacity-90 text-base">Place name</span>
                             </th>
                             <th className={`${col_className} bg-cyan-50 w-1/3 hidden md:table-cell`}>
                                 <span className="font-semibold leading-none opacity-90 text-base">Categories</span>
@@ -85,7 +85,7 @@ const AdminManagePlace = () => {
                     </thead>
                     <tbody className="w-full">
                         {/* Table rows (each place) */}
-                        <AdminManagePlaceRows places={places} col_className={col_className} loading={loading} />
+                        {places.map(place => (<AdminManagePlaceRows key={place.id} place={place} col_className={col_className} loading={loading} />))}
                     </tbody>
                 </table>
                 {/* Footer fo pagination */}
