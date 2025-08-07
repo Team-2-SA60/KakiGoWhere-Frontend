@@ -1,4 +1,6 @@
-const OpeningHoursDisplay = ({ openingHours }) => {
+import { RxCross1 } from "react-icons/rx";
+
+const OpeningHoursView = ({ openingHours }) => {
     const dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
     const formatTime = (hour, minute) => {
@@ -19,9 +21,9 @@ const OpeningHoursDisplay = ({ openingHours }) => {
     });
 
     return (
-        <div className="flex flex-col flex-wrap md:max-h-52 w-fit border border-gray-100 rounded-md shadow-sm px-3 py-1 overflow-auto gap-2">
+        <div className="flex flex-col flex-wrap md:max-h-52 w-full border border-gray-100 rounded-md shadow-sm px-3 py-1 overflow-auto gap-2">
             {dayNames.map((day, index) => (
-                <div key={day} className="flex place-items-center hover:bg-gray-100 rounded-md transition-all">
+                <div key={day} className="flex place-items-center hover:bg-gray-100 rounded-md justify-evenly transition-all">
                     <span className="font-semibold text-sm text-right min-w-[5rem]">{day}</span>
                     <div className="flex-row">
                         {groupedByDay[index] ? (
@@ -32,10 +34,11 @@ const OpeningHoursDisplay = ({ openingHours }) => {
                             ))
                         ) : ""}
                     </div>
+                    <button type="button"><RxCross1 className="w-4 h-4" /></button>
                 </div>
             ))}
         </div>
     );
 };
 
-export default OpeningHoursDisplay;
+export default OpeningHoursView;

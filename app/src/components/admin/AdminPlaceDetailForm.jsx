@@ -206,7 +206,7 @@ const AdminPlaceDetailForm = forwardRef(({ place, setPlace, edit }, ref) => {
                             </span>
                             <button type="button" className="border border-cyan-100 w-full place-items-center bg-gray-100 mt-2 px-2 py-1 rounded-2xl text-sm text-gray-600 hover:text-cyan-600 hover:bg-transparent transition-all duration-300 active:bg-cyan-100"
                                 onClick={handleOpeningHoursModal}>
-                                Edit
+                                Add
                             </button>
                         </div>
                         <div className="w-full">
