@@ -1,5 +1,5 @@
-import { Button, Dialog, DialogFooter, DialogHeader } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { Alert, Button, Dialog, DialogFooter, DialogHeader } from "@material-tailwind/react";
+import { useState } from "react";
 import OpenTimeForm from "./OpenTimeForm";
 
 const OpeningHoursModal = ({ openOpeningHoursModal, handleOpeningHoursModal, openingHours, setOpeningHours }) => {
@@ -11,14 +11,27 @@ const OpeningHoursModal = ({ openOpeningHoursModal, handleOpeningHoursModal, ope
         closeHour: 1,
         closeMinute: 0
     });
+    const [errMsg, setErrMsg] = useState("");
 
     const handleConfirm = () => {
-        console.log(isConflict(time, openingHours));
+        setErrMsg("");
+
+        if (isEndInvalid(time)) {
+            setErrMsg("Closing Time must be after Opening Time")
+            return;
+        }
+        if (isConflict(time, openingHours)) {
+            setErrMsg("Opening Time clash with existing Opening Hours")
+            return;
+        }
+        setOpeningHours(prev => [...prev, time]);
+        handleOpeningHoursModal(false);
     }
 
     const toMinutes = ({ day, hour, minute }) => day * 1440 + hour * 60 + minute;
 
-    const isConflict = (newTime, existingTimes) => {
+    // check if End Time is after Start Time
+    const isEndInvalid = (newTime) => {
         const newStart = toMinutes({
             day: newTime.openDay,
             hour: newTime.openHour,
@@ -31,6 +44,23 @@ const OpeningHoursModal = ({ openOpeningHoursModal, handleOpeningHoursModal, ope
             minute: newTime.closeMinute,
         });
 
+        return newEnd <= newStart;
+    }
+
+    // check if New time clashes with existing Opening Hours
+    const isConflict = (newTime, existingTimes) => {
+        const newStart = toMinutes({
+            day: newTime.openDay,
+            hour: newTime.openHour,
+            minute: newTime.openMinute,
+        });
+
+        const newEnd = toMinutes({
+            day: newTime.closeDay,
+            hour: newTime.closeHour,
+            minute: newTime.closeMinute,
+        });
+        
         return existingTimes.some(time => {
             const existingStart = toMinutes({
                 day: time.openDay,
@@ -54,6 +84,12 @@ const OpeningHoursModal = ({ openOpeningHoursModal, handleOpeningHoursModal, ope
             <DialogHeader>Add Opening Time</DialogHeader>
             <div className="w-full">
                 <OpenTimeForm time={time} setTime={setTime} />
+            </div>
+            {/* Alert if opening time intersects with existing openingHours */}
+            <div className={`col-span-12 px-4 pt-2 transition-all ease-in-out duration-300 ${errMsg ? "" : "hidden"}`}>
+                <Alert className="p-2 shadow-md" open={errMsg != null} variant="ghost" color="red">
+                    {errMsg}
+                </Alert>
             </div>
             <DialogFooter>
                 <Button

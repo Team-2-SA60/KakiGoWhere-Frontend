@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Button } from '@material-tailwind/react';
 import api from '../../utils/axios';
 
-const ImageUploader = ({ place }) => {
+const ImageUploader = ({ place, setImageFile }) => {
     const [preview, setPreview] = useState(null);
-    const [imageFile, setImageFile] = useState(null);
 
     useEffect(() => {
-        if (!place) return;
+        if (!place.id) return;
         fetchPlaceImage(place.id);
-        // eslint-disable-next-line
-    }, [place])
+    }, [place.id])
 
     async function fetchPlaceImage(id) {
         let fetchUrl = `/places/image/${id}`;
@@ -25,9 +22,9 @@ const ImageUploader = ({ place }) => {
 
             // PlaceId not found
             if (statusCode === 404) {
-                setErrMsg(err?.message + " place image not found");
+                console.log(err?.message + " place image not found");
             } else {
-                console.error("Failed to get place image", err);
+                console.log("Failed to get place image", err);
             }
         }
     }
@@ -44,36 +41,13 @@ const ImageUploader = ({ place }) => {
         document.getElementById('imageInput').click();
     };
 
-    const handleSave = async () => {
-        if (!imageFile) {
-            alert('Please upload an image first.');
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append('image', imageFile);
-
-        try {
-            const response = await axios.post('http://localhost:8080/api/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            console.log('Upload success:', response.data);
-            alert('Image uploaded successfully!');
-        } catch (error) {
-            console.error('Upload failed:', error);
-            alert('Upload failed');
-        }
-    };
-
     return (
         <div className="flex flex-col h-fit place-content-center place-items-center gap-4 p-6">
             {preview ? (
                 <img src={preview} alt="Preview" className="w-full max-w-96 max-h-96 object-contain border" />
             ) : (
                 <div className="w-64 h-64 border flex items-center justify-center text-gray-500">
-                    No image selected
+                    No image
                 </div>
             )}
 

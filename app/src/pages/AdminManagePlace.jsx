@@ -85,7 +85,7 @@ const AdminManagePlace = () => {
                     </thead>
                     <tbody className="w-full">
                         {/* Table rows (each place) */}
-                        {places.map(place => (<AdminManagePlaceRows place={place} col_className={col_className} loading={loading} />))}
+                        {places.map(place => (<AdminManagePlaceRows key={place.id} place={place} col_className={col_className} loading={loading} />))}
                     </tbody>
                 </table>
                 {/* Footer fo pagination */}

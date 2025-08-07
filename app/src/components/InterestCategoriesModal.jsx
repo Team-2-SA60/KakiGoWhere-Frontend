@@ -13,11 +13,11 @@ const InterestCategoriesModal = ({ openCategoriesModal, handleCategoriesModal, c
 
     useEffect(() => {
         fetchInterestCategories();
-        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
         setExistingCategories(categories);
+        // eslint-disable-next-line
     }, [handleCategoriesModal])
 
     async function fetchInterestCategories() {
