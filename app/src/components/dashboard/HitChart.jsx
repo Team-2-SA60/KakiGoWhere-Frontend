@@ -22,37 +22,23 @@ export default function HitChart({ placeId, month }) {
             setLoading(true);
             setErrMsg("");
 
-            // MOCK DATA phase
-            const mockData = Array.from({ length: 31 }, (_, i) => {
-                const day = i + 1;
-                const dateStr = `${month}-${String(day).padStart(2, "0")}`;
-                return { date: dateStr, count: Math.floor(Math.random() * 100) + 1 };
-            });
-            visitsCache[cacheKey] = mockData;
-            setVisits(mockData);
-
-            // end mock, stop spinner
-            setLoading(false);
-
-            // When your real API is ready, you can replace the above with:
-            /*
             try {
-              const resp = await fetch(
-                `/api/visits?placeId=${placeId}&month=${encodeURIComponent(month)}`
-              );
-              if (!resp.ok) throw new Error(`Status ${resp.status}`);
-              const data = await resp.json();
-              visitsCache[cacheKey] = data;
-              setVisits(data);
+                const resp = await fetch(
+                    `/api/places/${placeId}/visits?month=${encodeURIComponent(month)}`
+                );
+                if (!resp.ok) throw new Error(`Status ${resp.status}`);
+                const data = await resp.json();
+                const list = Object.entries(data)
+                    .map(([day, count]) => ({ date: day, count }));
+                visitsCache[cacheKey] = list;
+                setVisits(list);
             } catch (err) {
-              console.error(err);
-              setErrMsg("No visit data.");
+                console.error(err);
+                setErrMsg("Could not load visits");
             } finally {
-              setLoading(false);
+                setLoading(false);
             }
-            */
         }
-
         loadVisits();
     }, [placeId, month]);
 
@@ -105,7 +91,7 @@ export default function HitChart({ placeId, month }) {
         <Card className="h-64">
             <CardBody className="p-2">
                 <h3 className="text-l font-semibold mb-4">
-                    Page Visits ({headerLabel})
+                    Page Visits for {headerLabel} (Unique Users)
                 </h3>
 
                 {loading && (
