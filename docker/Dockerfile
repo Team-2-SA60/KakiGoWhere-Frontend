@@ -4,6 +4,8 @@ FROM node:20-alpine AS build
 # Env
 ARG VITE_API_URL=http://localhost:8080
 ENV VITE_API_URL=$VITE_API_URL
+ARG VITE_ML_API_URL=http://localhost:5001
+ENV VITE_ML_API_URL=$VITE_ML_API_URL
 
 # Change directory
 WORKDIR /app
