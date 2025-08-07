@@ -8,6 +8,11 @@ export default function SentimentCard({ placeId }) {
     const [errMsg, setErrMsg]     = useState("");
 
     useEffect(() => {
+        if (placeId == null) {
+            setKeywords([]);
+            return;
+        }
+
         if (sentimentCache[placeId]) {
             setKeywords(sentimentCache[placeId]);
             return;
