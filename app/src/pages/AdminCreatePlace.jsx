@@ -65,7 +65,6 @@ const AdminCreatePlace = () => {
             setSaveLoading(false);
             return false;
         }
-        return true;
     };
 
     async function uploadImage(placeId) {

@@ -50,7 +50,7 @@ const AdminPlaceDetail = () => {
 
             // PlaceId not found
             if (statusCode === 404) {
-                setMsg(err?.message + " place not found");
+                setErrMsg(err?.message + " place not found");
                 navigate("/admin/places")
             } else {
                 console.error("Failed to get place detail", err);
@@ -81,13 +81,14 @@ const AdminPlaceDetail = () => {
 
         try {
             const response = await api.post(postUrl, place);
+            let data = await response.data;
+            return data;
         } catch (err) {
             console.error('Upload failed:', err);
             setErrMsg(err.response?.data || err.message || "Update failed");
             setSaveLoading(false);
             return false;
         }
-        return true;
     };
 
     async function uploadImage() {

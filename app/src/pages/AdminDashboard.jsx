@@ -29,6 +29,7 @@ const AdminDashboard = () => {
         setLoading(true);
         setStatsError("");
         getStats();
+        // eslint-disable-next-line
     }, [dateParam]);
 
     async function getStats() {
