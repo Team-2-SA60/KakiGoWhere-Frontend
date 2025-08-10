@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../components/admin/AdminLayout";
 import { useState } from "react";
 import api from "../utils/axios";
-import { Alert, Button, Card, Dialog, DialogBody, DialogFooter, DialogHeader, Spinner } from "@material-tailwind/react";
+import { Alert, Button, Card } from "@material-tailwind/react";
 import AdminPlaceDetailForm from "../components/admin/AdminPlaceDetailForm";
 import ImageUploader from "../components/admin/ImageUploader";
 import SuccessModal from "../components/admin/SuccessModal";
