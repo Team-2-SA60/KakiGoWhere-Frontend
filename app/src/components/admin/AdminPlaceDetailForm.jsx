@@ -3,6 +3,7 @@ import { RxCross1, RxPlus } from "react-icons/rx";
 import InterestCategoriesModal from "../InterestCategoriesModal";
 import OpeningHoursView from "./OpeningHoursView";
 import OpeningHoursModal from "./OpeningHoursModal";
+import { Tooltip } from "@material-tailwind/react";
 
 const AdminPlaceDetailForm = ({ place, setPlace }) => {
     const [categories, setCategories] = useState([]);
@@ -125,11 +126,15 @@ const AdminPlaceDetailForm = ({ place, setPlace }) => {
                         {/* AutoFetch */}
                         <div className="flex-row w-1/2 gap-2 place-items-center align-middle">
                             <span className="block uppercase min-w-[5rem] mb-1 text-gray-800 text-xs font-semibold text-center md:text-nowrap">Automatic Update</span>
-                            <button type="button"
-                                className={`w-full text-sm border px-4 py-1 transition-all ease-in-out duration-200 rounded-md bg-gray-200 hover:border-green-200 ${place.autoFetch ? "bg-green-300" : ""}`}
-                                onClick={() => setPlace(prev => ({ ...prev, autoFetch: !place.autoFetch }))}>
-                                {place.autoFetch ? "Enabled" : "Disabled"}
-                            </button>
+                            <Tooltip content="Cannot autofetch for manual creation" placement="top" className={`text-black bg-cyan-100 border-b-2 text-[10px] p-1.5 ${place.googleId ? "hidden" : ""}`}>
+                                <button type="button"
+                                    className={`w-full text-sm border px-4 py-1 transition-all ease-in-out duration-200 rounded-md bg-gray-200 hover:border-green-200 
+                                        ${place.autoFetch ? "bg-green-300" : ""}`}
+                                    onClick={() => setPlace(prev => ({ ...prev, autoFetch: !place.autoFetch }))}
+                                    disabled={!place.googleId}>
+                                    {place.autoFetch ? "Enabled" : "Disabled"}
+                                </button>
+                            </Tooltip>
                         </div>
                     </div>
                     {/* Categories */}

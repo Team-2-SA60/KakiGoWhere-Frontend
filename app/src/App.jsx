@@ -5,6 +5,7 @@ import AdminRoute from './components/routes/AdminRoute';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminManagePlace from './pages/AdminManagePlace'
 import AdminPlaceDetail from './pages/AdminPlaceDetail';
+import AdminCreatePlace from './pages/AdminCreatePlace';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/admin/dashboard' element={<AdminDashboard />} />
           <Route path='/admin/places' element={<AdminManagePlace />} />
           <Route path='/admin/place/:id' element={<AdminPlaceDetail />} />
+          <Route path='/admin/place/create' element={<AdminCreatePlace />} /> 
         </Route>
       </Routes>
     </Router>
