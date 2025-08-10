@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardBody, Spinner } from "@material-tailwind/react";
 import Chart from "react-apexcharts";
+import api from "../../utils/axios";
 
 const visitsCache = {};
 
@@ -23,12 +24,10 @@ export default function HitChart({ placeId, month }) {
             setErrMsg("");
 
             try {
-                const resp = await fetch(
-                    `/api/places/${placeId}/visits?month=${encodeURIComponent(month)}`
+                const resp = await api.get(
+                    `/places/${placeId}/visits?month=${encodeURIComponent(month)}`
                 );
-                if (!resp.ok) throw new Error(`Status ${resp.status}`);
-                const data = await resp.json();
-                const list = Object.entries(data)
+                const list = Object.entries(resp.data)
                     .map(([day, count]) => ({ date: day, count }));
                 visitsCache[cacheKey] = list;
                 setVisits(list);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardBody, Spinner } from "@material-tailwind/react";
+import { mlApi } from "../../utils/axios";
 
 const sentimentCache = {}; // keep a cache for fetched sentiments
 export default function SentimentCard({ placeId }) {
@@ -23,9 +24,8 @@ export default function SentimentCard({ placeId }) {
             setErrMsg("");
 
             try {
-                const resp = await fetch(`/adjectives?placeId=${placeId}`);
-                if (!resp.ok) throw new Error(`Status ${resp.status}`);
-                const data = await resp.json();
+                const resp = await mlApi.get(`/adjectives?placeId=${placeId}`);
+                const data = await resp.data;
 
                 // pull common & noteworthy into arrays
                 const commonArr     = Array.isArray(data.common)     ? data.common     : [];

@@ -28,11 +28,7 @@ npm run lint
 #### Docker
 1. Build docker image
 ```
-docker build -f ../docker/Dockerfile \
-  -t kakigowhere-react \
-  --build-arg VITE_API_URL=http://localhost:8080 \
-  --build-arg VITE_ML_API_URL=http://localhost:5001 \
-  .
+docker build -f ../docker/Dockerfile -t kakigowhere-react --build-arg VITE_API_URL=http://localhost .
 ```
 
 2. Run docker container. Access at http://localhost:80
