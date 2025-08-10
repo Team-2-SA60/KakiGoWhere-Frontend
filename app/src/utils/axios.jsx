@@ -10,7 +10,7 @@ const api = axios.create({
 
 // Flask ML service client
 export const mlApi = axios.create({
-  baseURL: `${apiUrl}:5001/api`,
+  baseURL: `${apiUrl}:5001/`,
 });
 
 export default api;

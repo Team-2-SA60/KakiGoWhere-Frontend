@@ -11,6 +11,7 @@ import {
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
+import api from "../utils/axios";
 
 const AdminDashboard = () => {
     const [date, setDate] = useState(new Date());
@@ -27,20 +28,24 @@ const AdminDashboard = () => {
     useEffect(() => {
         setLoading(true);
         setStatsError("");
-        fetch(`/api/stats?date=${dateParam}`)
-            .then(res => {
-                if (!res.ok) throw new Error(res.statusText);
-                return res.json();
-            })
-            .then(data => {
-                setStats({
-                    signUps: data.numberOfSignUps,
-                    uniqueVisits: data.numberOfUniqueVisits,
-                });
-            })
-            .catch(() => setStatsError("No stats to show."))
-            .finally(() => setLoading(false));
+        getStats();
     }, [dateParam]);
+
+    async function getStats() {
+        try {
+            const resp = await api.get(`/stats?date=${dateParam}`);
+            const data = resp.data;
+            setStats({
+                signUps: data.numberOfSignUps,
+                uniqueVisits: data.numberOfUniqueVisits,
+            })
+        } catch (err) {
+            setStatsError("No stats to show.");
+            console.log(err);
+        } finally {
+            setLoading(false)
+        }
+    }
 
     // track selected place id
     const [selectedPlaceId, setSelectedPlaceId] = useState(null);
@@ -73,7 +78,7 @@ const AdminDashboard = () => {
                                     day: "p-1.5 rounded text-sm",
                                 }}
                                 components={{
-                                    IconLeft:  props => <ChevronLeftIcon {...props} className="h-4 w-4" />,
+                                    IconLeft: props => <ChevronLeftIcon {...props} className="h-4 w-4" />,
                                     IconRight: props => <ChevronRightIcon {...props} className="h-4 w-4" />,
                                 }}
                             />
