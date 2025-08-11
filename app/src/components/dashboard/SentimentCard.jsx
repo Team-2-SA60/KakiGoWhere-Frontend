@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardBody, Spinner } from "@material-tailwind/react";
 import { mlApi } from "../../utils/axios";
 
@@ -45,9 +45,15 @@ export default function SentimentCard({ placeId }) {
         loadKeywords();
     }, [placeId]);
 
+    const Sentiments = () => {
+        return keywords.map(keyword => (
+            <p className="border px-2 py-1 rounded-xl bg-teal-50 text-sm cursor-pointer hover:scale-[102%] hover:bg-gray-200">{keyword}</p>
+        ))
+    }
+
     return (
-        <Card className="h-full">
-            <CardBody className="p-6">
+        <Card className="h-fit w-full hover:bg-gray-50 hover:shadow-lg p-2 transition-all">
+            <CardBody>
                 <h3 className="text-l font-semibold mb-4">
                     People think this place is...
                 </h3>
@@ -67,7 +73,9 @@ export default function SentimentCard({ placeId }) {
                 {/*  Keywords list  */}
                 {!loading && !errMsg && (
                     keywords.length > 0? (
-                            <p className = "text-gray-700 text-sm">{keywords.join(", ")}</p>
+                            <div className="flex flex-wrap gap-3 place-content-center">
+                                <Sentiments />
+                            </div>
                         ) : (
                             <p className="text-red-800 text-sm italic">Not enough ratings to determine sentiments.</p>
                     )

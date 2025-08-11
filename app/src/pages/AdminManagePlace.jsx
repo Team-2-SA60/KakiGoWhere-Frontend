@@ -60,7 +60,7 @@ const AdminManagePlace = () => {
     return (
         <Layout>
             <AdminSearchbar setSearch={setSearch} />
-            <Card className="h-fit min-h-[200px] w-full overflow-auto border border-gray-100 text-base">
+            <Card className="h-fit min-h-[200px] w-full max-w-5xl overflow-auto border border-gray-100 text-base hover:shadow-lg">
                 <CardHeader floated={false} shadow={false} className="flex items-center justify-between p-2 m-1">
                     Page {currentPage + 1} of {totalPages}
                     <ManagePlacePageButtons handlePageChange={handlePageChange} />

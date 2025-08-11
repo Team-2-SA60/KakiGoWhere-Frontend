@@ -6,7 +6,7 @@ import {
     Input,
     Popover,
     PopoverHandler,
-    PopoverContent,
+    PopoverContent
 } from "@material-tailwind/react";
 import { format } from "date-fns";
 import { DayPicker } from "react-day-picker";
@@ -53,19 +53,37 @@ const AdminDashboard = () => {
 
     return (
         <Layout>
-            <div className="p-3 grid grid-cols-1 md:grid-cols-2 gap-3 items-center">
-                <div className="text-3xl font-semibold">Statistics for</div>
-
+            <div className="w-full max-w-5xl flex flex-col lg:flex-row md:items-center justify-between gap-4 mt-14 md:mt-0 border border-gray-200 rounded-lg p-8 shadow-md bg-gradient-to-r from-blue-gray-50 to-cyan-50 hover:shadow-lg transition-all">
+                {/* Title */}
                 <div>
+                    <span className="text-2xl font-semibold">Dashboard</span>
+                </div>
+
+                {/* Date Picker */}
+                <div className="flex flex-col md:flex-row items-center gap-3 self-center">
+                    <span className="text-base text-gray-900 whitespace-nowrap">View statistics for</span>
+
                     <Popover placement="bottom">
                         <PopoverHandler>
                             <Input
                                 label="Select a Date"
+                                color="black"
                                 readOnly
                                 value={format(date, "PPP")}
+                                className="cursor-pointer hover:bg-teal-100 min-w-[160px] transition-all"
                             />
                         </PopoverHandler>
-                        <PopoverContent>
+
+                        <PopoverContent className="relative p-4">
+                            {/* Floating 'Today' Button */}
+                            <button
+                                onClick={() => setDate(new Date())}
+                                className="absolute top-3 right-3 bg-white border border-gray-300 rounded-full px-3 py-1 text-xs font-medium shadow-sm hover:bg-gray-100 transition"
+                            >
+                                Today
+                            </button>
+
+                            {/* Calendar */}
                             <DayPicker
                                 mode="single"
                                 selected={date}
@@ -76,7 +94,10 @@ const AdminDashboard = () => {
                                     caption_label: "font-bold mb-2",
                                     month_caption: "flex justify-center",
                                     nav: "flex justify-center",
-                                    day: "p-1.5 rounded text-sm",
+                                    day: "rounded text-sm hover:bg-gray-200",
+                                    day_button: "p-2",
+                                    selected: "bg-gray-200",
+                                    today: "text-cyan-700"
                                 }}
                                 components={{
                                     IconLeft: props => <ChevronLeftIcon {...props} className="h-4 w-4" />,
@@ -88,10 +109,12 @@ const AdminDashboard = () => {
                 </div>
             </div>
 
+
             <StatsCards
                 stats={stats}
                 loading={loadingStats}
                 error={statsError}
+                date={date}
             />
 
             <PlaceStatisticsGrid

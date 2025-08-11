@@ -29,7 +29,7 @@ const Layout = ({ children }) => {
         </div>
 
         {/* Content */}
-        <div className="px-4 h-full w-full max-w-[1200px] place-items-center">{children}</div>
+        <div className="px-4 mt-10 h-full w-full max-w-[1200px] place-items-center">{children}</div>
       </div>
     </div>
   );

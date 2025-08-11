@@ -10,7 +10,7 @@ const handleCreatePlace = () => {
 }
 
     return (
-        <div className="ml-[4rem] w-[85%] md:ml-0 md:w-full my-4 bg-white shadow-sm border border-gray-100 rounded-lg p-2">
+        <div className="ml-[4rem] w-[85%] md:ml-0 md:w-full max-w-5xl my-4 bg-gradient-to-br from-blue-gray-50 to-cyan-50 shadow-sm border border-gray-100 rounded-lg p-2 hover:shadow-md">
                 <div className="flex w-full items-center justify-between gap-0">
                     <div className="hidden md:block flex-none w-[8rem]">
                         <span className="font-bold w-full ">Manage Places</span>
