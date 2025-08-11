@@ -25,7 +25,7 @@ export default function HitChart({ placeId, month }) {
 
             try {
                 const resp = await api.get(
-                    `/places/${placeId}/visits?month=${encodeURIComponent(month)}`
+                    `/stats/places/${placeId}/visits?month=${encodeURIComponent(month)}`
                 );
                 const list = Object.entries(resp.data)
                     .map(([day, count]) => ({ date: day, count }));
@@ -90,7 +90,7 @@ export default function HitChart({ placeId, month }) {
         <Card className="h-full w-full place-content-center hover:shadow-lg transition-all">
             <CardBody className="p-2">
                 <h3 className="text-l font-semibold mb-4">
-                    Page Visits for {headerLabel} (Unique Users)
+                    Page Visits for {headerLabel}
                 </h3>
 
                 {loading && (
