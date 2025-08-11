@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Card, CardHeader, CardFooter } from "@material-tailwind/react";
+import { useState, useEffect } from "react";
+import { Card, CardHeader } from "@material-tailwind/react";
 import PlaceSearchbar from "./PlaceSearchbar";
 import PlacePageButtons from "./PlacePageButtons";
 import PlaceRow from "./PlaceRow";
@@ -57,10 +57,10 @@ export default function PlaceList({ selectedPlaceId, onSelect }) {
     }
 
     // cell styling
-    const col_className = "p-1 border-b border-blue-gray-50 text-[10px]";
+    const col_className = "p-1 border-b border-blue-gray-50 text-[12px] h-10";
 
     return (
-        <Card className="w-full border-gray-100 border overflow-auto text-[10px]">
+        <Card className="w-full h-full overflow-auto text-[12px]">
             <PlaceSearchbar setSearch={setSearch} />
 
             <CardHeader floated={false} shadow={false} className="flex justify-between p-0.5">
@@ -84,11 +84,6 @@ export default function PlaceList({ selectedPlaceId, onSelect }) {
                 />
                 </tbody>
             </table>
-
-            <CardFooter className="flex justify-between p-2">
-                <span className="text-[10px]">Page { Math.min(currentPage + 1, totalPages || 1) } of { Math.max(totalPages, 1) }</span>
-                <PlacePageButtons handlePageChange={handlePageChange} />
-            </CardFooter>
         </Card>
     );
 }

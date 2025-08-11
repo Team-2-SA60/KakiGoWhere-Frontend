@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardBody, Spinner } from "@material-tailwind/react";
 import Chart from "react-apexcharts";
 import api from "../../utils/axios";
@@ -87,7 +87,7 @@ export default function HitChart({ placeId, month }) {
 
     // render chart
     return (
-        <Card className="h-64">
+        <Card className="h-full w-full place-content-center hover:shadow-lg transition-all">
             <CardBody className="p-2">
                 <h3 className="text-l font-semibold mb-4">
                     Page Visits for {headerLabel} (Unique Users)
@@ -108,7 +108,6 @@ export default function HitChart({ placeId, month }) {
                         options={chartOptions}
                         series={chartSeries}
                         type="line"
-                        height={220}
                     />
                 )}
 
