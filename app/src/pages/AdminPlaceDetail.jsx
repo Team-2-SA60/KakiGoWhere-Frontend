@@ -80,7 +80,7 @@ const AdminPlaceDetail = () => {
         let postUrl = "/admin/place/update"
 
         try {
-            const response = await api.post(postUrl, place);
+            const response = await api.put(postUrl, place);
             let data = await response.data;
             return data;
         } catch (err) {
