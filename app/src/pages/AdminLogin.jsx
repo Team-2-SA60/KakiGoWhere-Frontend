@@ -31,12 +31,9 @@ const AdminLogin = () => {
             const statusCode = err.response?.status;
             const errorMessage = err.response?.data;
             
-            if (statusCode === 400 || statusCode === 401) {
-                // 400 = Invalid email, 401 = Invalid password
-                setErrMsg(errorMessage)
-            };
-
-            console.log(errorMessage);
+            // 400 = Invalid email, 401 = Invalid password
+            setErrMsg(errorMessage)
+            console.log("Status: " + statusCode, ", error: ", errorMessage);
         } finally {
             setLoading(false);
         }

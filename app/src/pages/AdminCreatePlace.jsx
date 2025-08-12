@@ -49,7 +49,7 @@ const AdminCreatePlace = () => {
         }
 
         setOpenSuccessModal(true);
-    };
+    }
 
     async function postCreatePlace() {
         let postUrl = "/admin/place/create"
@@ -65,7 +65,7 @@ const AdminCreatePlace = () => {
             setSaveLoading(false);
             return false;
         }
-    };
+    }
 
     async function uploadImage(placeId) {
         if (!imageFile) return true;
