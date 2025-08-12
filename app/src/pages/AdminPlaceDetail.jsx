@@ -84,7 +84,7 @@ const AdminPlaceDetail = () => {
             let data = await response.data;
             return data;
         } catch (err) {
-            console.error('Upload failed:', err);
+            console.error('Update failed:', err);
             setErrMsg(err.response?.data || err.message || "Update failed");
             setSaveLoading(false);
             return false;
