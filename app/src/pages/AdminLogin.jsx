@@ -28,12 +28,19 @@ const AdminLogin = () => {
             await loginAdmin(email, password);
             navigate('/admin/dashboard');
         } catch (err) {
-            const statusCode = err.response?.status;
-            const errorMessage = err.response?.data;
-            
-            // 400 = Invalid email, 401 = Invalid password
-            setErrMsg(errorMessage)
-            console.log("Status: " + statusCode, ", error: ", errorMessage);
+            let errorMessage;
+            if (err.response) {
+                // status code >= 400
+                errorMessage = err.response.data || `Error ${err.response.status}`;
+            } else if (err.request) {
+                // no response from server
+                errorMessage = "No response from server";
+            } else {
+                // others
+                errorMessage = err.message;
+            }
+            setErrMsg(errorMessage);
+            console.log("Login error:", errorMessage);
         } finally {
             setLoading(false);
         }
