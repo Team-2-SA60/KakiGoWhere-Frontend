@@ -56,6 +56,10 @@ export default function PlaceList({ selectedPlaceId, onSelect }) {
         setCurrentPage(next);
     }
 
+    if (totalPages !== 0 && currentPage > totalPages - 1) {
+        setCurrentPage(0);
+    }
+
     // cell styling
     const col_className = "p-1 border-b border-blue-gray-50 text-[12px] h-10";
 

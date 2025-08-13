@@ -55,6 +55,10 @@ const AdminManagePlace = () => {
         setCurrentPage(currentPage + value);
     }
 
+    if (totalPages !== 0 && currentPage > totalPages - 1) {
+        setCurrentPage(0);
+    }
+
     const col_className = "p-3 border-b border-blue-gray-50 text-sm xl:text-base"
 
     return (
@@ -62,7 +66,7 @@ const AdminManagePlace = () => {
             <AdminSearchbar setSearch={setSearch} />
             <Card className="h-fit min-h-[200px] w-full max-w-5xl overflow-auto border border-gray-100 text-base hover:shadow-lg">
                 <CardHeader floated={false} shadow={false} className="flex items-center justify-between p-2 m-1">
-                    Page {currentPage + 1} of {totalPages}
+                    Page {Math.min(currentPage + 1, totalPages || 1)} of {Math.max(totalPages, 1)}
                     <ManagePlacePageButtons handlePageChange={handlePageChange} />
                 </CardHeader>
                 <table className="w-full table-fixed text-left">
@@ -86,12 +90,12 @@ const AdminManagePlace = () => {
                     <tbody className="w-full">
                         {/* Table rows (each place) */}
                         {places.length > 0 ? places.map(place => (<AdminManagePlaceRows key={place.id} place={place} col_className={col_className} loading={loading} />))
-                            : <tr><td colSpan={4} className="text-center p-4 font-semibold">No places returned...</td></tr>}
+                            : <tr><td colSpan={4} className="text-center p-4 font-semibold">No places found</td></tr>}
                     </tbody>
                 </table>
                 {/* Footer fo pagination */}
                 <CardFooter className="flex items-center justify-between p-2 m-1">
-                    Page {currentPage + 1} of {totalPages}
+                    Page {Math.min(currentPage + 1, totalPages || 1)} of {Math.max(totalPages, 1)}
                     <ManagePlacePageButtons handlePageChange={handlePageChange} />
                 </CardFooter>
             </Card>
