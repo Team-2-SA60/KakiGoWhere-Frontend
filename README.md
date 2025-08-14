@@ -1,42 +1,33 @@
-#### For developing
-1. Change directory to app
-```
-cd app
-```
 
-2. Install dependencies
-```
-npm install
-```
+## 🛠️ Getting started using 🐳 Docker
 
-3. Run locally at http://localhost:5173
-```
-npm run dev
-```
+Pre-requisite:
+- Follow steps on [KakiGoWhere-Backend](https://github.com/Team-2-SA60/KakiGoWhere-Backend)
 
-#### Commands for local testing
-1. SCA (npm audit)
-```
-npm audit --audit-level=high
-```
+---
 
-2. Lint (ESLint)
-```
-npm run lint
-```
+1. Open terminal / command prompt and change directory to KakiGoWhere
 
-#### Docker
-1. Build docker image
-```
-docker build -f ../docker/Dockerfile -t kakigowhere-react --build-arg VITE_API_URL=http://localhost .
-```
+    ```
+    cd KakiGoWhere
+    ```
 
-2. Run docker container. Access at http://localhost:80
-```
-docker run -d --name frontend -p 80:80 kakigowhere-react
-```
+2. Clone repository
 
-3. Stop and delete docker container
-```
-docker rm -f frontend
-```
+    ```
+    https://github.com/Team-2-SA60/KakiGoWhere-Frontend.git
+    ```
+
+3. Change directory to KakiGoWhere-Frontend/app
+
+    ```
+    cd KakiGoWhere-Frontend/app
+    ```
+
+4. Build and run React Frontend using Docker Compose
+
+    ```
+    docker compose -f ../docker/docker-compose.dev.yml up -d --build
+    ```
+
+5. Go back to [KakiGoWhere-Backend](https://github.com/Team-2-SA60/KakiGoWhere-Backend) and continue steps
