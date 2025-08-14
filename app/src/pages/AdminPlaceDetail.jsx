@@ -141,7 +141,7 @@ const AdminPlaceDetail = () => {
                         </div>
                         <div className="xl:w-2/5 place-content-center">
                             <ImageUploader place={place} imageFile={imageFile} setImageFile={setImageFile} />
-                            <div className="mt-5">
+                            <div className="mt-5 place-items-center">
                                 <Button color="cyan" onClick={handleConfirmModal}>Submit</Button>
                             </div>
                         </div>

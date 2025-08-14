@@ -61,7 +61,11 @@ const AdminCreatePlace = () => {
             return data;
         } catch (err) {
             console.error('Create failed:', err);
-            setErrMsg(err.response?.data || err.message || "Create failed");
+            if (err.response?.status === 409) {
+                setErrMsg("Place name already exists")
+            } else {
+                setErrMsg(err.response?.data || err.message || "Create failed");
+            }
             setSaveLoading(false);
             return false;
         }
@@ -109,7 +113,7 @@ const AdminCreatePlace = () => {
                             <Alert className="p-2 shadow-md" open={errMsg} variant="ghost" color="red">
                                 {errMsg}
                             </Alert>
-                            <div className="mt-5">
+                            <div className="mt-5 place-items-center">
                                 <Button color="cyan" loading={saveLoading} disabled={saveLoading} onClick={handleSave}>Submit</Button>
                             </div>
                         </div>
