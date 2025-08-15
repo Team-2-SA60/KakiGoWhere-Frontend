@@ -1,5 +1,11 @@
 
-## 🛠️ Getting started using 🐳 Docker
+## Production Server
+
+KakiGoWhere is deployed on Digital Ocean, and will be kept running until 31st August 2025.
+
+You can access our production server [here](http://206.189.43.202/admin/login)
+
+## 🛠️ Getting started using 🐳 Docker (Local run)
 
 Pre-requisite:
 - Follow steps on [KakiGoWhere-Backend](https://github.com/Team-2-SA60/KakiGoWhere-Backend)
@@ -31,3 +37,5 @@ Pre-requisite:
     ```
 
 5. Go back to [KakiGoWhere-Backend](https://github.com/Team-2-SA60/KakiGoWhere-Backend) and continue steps
+
+6. When all containers are running, access web application @ http://localhost/admin/login
