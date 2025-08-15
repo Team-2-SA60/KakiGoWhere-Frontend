@@ -3,7 +3,7 @@
 
 KakiGoWhere is deployed on Digital Ocean, and will be kept running until 31st August 2025.
 
-You can access our production server [here](http://206.189.43.202/admin/login)
+You can access our deployed Web Application [here](http://206.189.43.202/admin/login)
 
 ## 🛠️ Getting started using 🐳 Docker (Local run)
 
@@ -21,7 +21,7 @@ Pre-requisite:
 2. Clone repository
 
     ```
-    https://github.com/Team-2-SA60/KakiGoWhere-Frontend.git
+    git clone https://github.com/Team-2-SA60/KakiGoWhere-Frontend.git
     ```
 
 3. Change directory to KakiGoWhere-Frontend/app
