@@ -1,42 +1,43 @@
-#### For developing
-1. Change directory to app
-```
-cd app
-```
 
-2. Install dependencies
-```
-npm install
-```
+## Production Server
 
-3. Run locally at http://localhost:5173
-```
-npm run dev
-```
+KakiGoWhere is deployed on Digital Ocean, and will be kept running until 31st August 2025.
 
-#### Commands for local testing
-1. SCA (npm audit)
-```
-npm audit --audit-level=high
-```
+You can access our production server [here](http://206.189.43.202/admin/login)
 
-2. Lint (ESLint)
-```
-npm run lint
-```
+## 🛠️ Getting started using 🐳 Docker (Local run)
 
-#### Docker
-1. Build docker image
-```
-docker build -f ../docker/Dockerfile -t kakigowhere-react --build-arg VITE_API_URL=http://localhost .
-```
+Pre-requisite:
+- Follow steps on [KakiGoWhere-Backend](https://github.com/Team-2-SA60/KakiGoWhere-Backend)
 
-2. Run docker container. Access at http://localhost:80
-```
-docker run -d --name frontend -p 80:80 kakigowhere-react
-```
+---
 
-3. Stop and delete docker container
-```
-docker rm -f frontend
-```
+1. Open terminal / command prompt and change directory to KakiGoWhere
+
+    ```
+    cd KakiGoWhere
+    ```
+
+2. Clone repository
+
+    ```
+    https://github.com/Team-2-SA60/KakiGoWhere-Frontend.git
+    ```
+
+3. Change directory to KakiGoWhere-Frontend/app
+
+    ```
+    cd KakiGoWhere-Frontend/app
+    ```
+
+4. Build and run React Frontend using Docker Compose
+
+    ```
+    docker compose -f ../docker/docker-compose.dev.yml up -d --build
+    ```
+
+5. Go back to [KakiGoWhere-Backend](https://github.com/Team-2-SA60/KakiGoWhere-Backend) and continue steps
+
+6. When all containers are running: 
+- Access web application @ http://localhost/admin/login
+- Mobile app (android) @ https://github.com/Team-2-SA60/KakiGoWhere-Android

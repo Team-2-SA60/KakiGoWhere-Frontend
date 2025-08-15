@@ -1,0 +1,10 @@
+services:
+  frontend:
+    image: kakigowhere-react
+    build:
+      context: ../app
+      dockerfile: ../docker/Dockerfile
+      args:
+        VITE_API_URL: "http://localhost"
+    ports:
+      - "80:80"
