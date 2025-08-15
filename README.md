@@ -38,4 +38,6 @@ Pre-requisite:
 
 5. Go back to [KakiGoWhere-Backend](https://github.com/Team-2-SA60/KakiGoWhere-Backend) and continue steps
 
-6. When all containers are running, access web application @ http://localhost/admin/login
+6. When all containers are running: 
+- Access web application @ http://localhost/admin/login
+- Mobile app (android) @ https://github.com/Team-2-SA60/KakiGoWhere-Android
