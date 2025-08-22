@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Layout from '../components/admin/AdminLayout';
+import Layout from '../components/admin_manage_place/AdminLayout';
 import StatsCards from "../components/dashboard/StatsCards";
 import PlaceStatisticsGrid from "../components/dashboard/PlaceStatisticsGrid";
 import {

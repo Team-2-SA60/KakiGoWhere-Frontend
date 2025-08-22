@@ -1,6 +1,6 @@
 import { Card, ListItem, ListItemPrefix } from "@material-tailwind/react";
 import { FaChartSimple } from "react-icons/fa6";
-import { FaRegMap } from "react-icons/fa";
+import {FaRegCalendar, FaRegMap} from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import { useAuth } from "../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -25,6 +25,11 @@ const Sidebar = () => {
             label: "Manage Places",
             icon: <FaRegMap />,
             path: "/admin/places"
+        },
+        {
+            label: "Events",
+            icon: <FaRegCalendar />,
+            path: "/admin/events"
         }
     ];
 

@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import Layout from "../components/admin/AdminLayout";
+import Layout from "../components/admin_manage_place/AdminLayout";
 import { useState } from "react";
 import api from "../utils/axios";
 import { Alert, Button, Card } from "@material-tailwind/react";
-import AdminPlaceDetailForm from "../components/admin/AdminPlaceDetailForm";
-import ImageUploader from "../components/admin/ImageUploader";
-import SuccessModal from "../components/admin/SuccessModal";
+import AdminPlaceDetailForm from "../components/admin_manage_place/AdminPlaceDetailForm";
+import ImageUploader from "../components/admin_manage_place/ImageUploader";
+import SuccessModal from "../components/admin_manage_place/SuccessModal";
 
 const AdminCreatePlace = () => {
     const [place, setPlace] = useState({
