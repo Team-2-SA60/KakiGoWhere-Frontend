@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
-import Layout from "../components/admin/AdminLayout";
+import Layout from "../components/admin_manage_place/AdminLayout";
 import { useEffect, useState } from "react";
 import api from "../utils/axios";
 import { Alert, Button, Card, Dialog, DialogBody, DialogFooter, DialogHeader, Spinner } from "@material-tailwind/react";
-import AdminPlaceDetailForm from "../components/admin/AdminPlaceDetailForm";
-import ImageUploader from "../components/admin/ImageUploader";
-import SuccessModal from "../components/admin/SuccessModal";
+import AdminPlaceDetailForm from "../components/admin_manage_place/AdminPlaceDetailForm";
+import ImageUploader from "../components/admin_manage_place/ImageUploader";
+import SuccessModal from "../components/admin_manage_place/SuccessModal";
 
 const AdminPlaceDetail = () => {
     const { id } = useParams();
@@ -89,7 +89,7 @@ const AdminPlaceDetail = () => {
             setSaveLoading(false);
             return false;
         }
-    };
+    }
 
     async function uploadImage() {
         if (!imageFile) return true;
@@ -114,7 +114,7 @@ const AdminPlaceDetail = () => {
             return false;
         }
         return true;
-    };
+    }
 
     const handleConfirmModal = () => {
         setErrMsg("");
