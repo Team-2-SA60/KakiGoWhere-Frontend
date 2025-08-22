@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {Button, Tooltip} from "@material-tailwind/react";
+import {Tooltip} from "@material-tailwind/react";
 import {BiSolidEdit} from "react-icons/bi";
 
 const ManageEventRows = ({ eventItem, col_className }) => {

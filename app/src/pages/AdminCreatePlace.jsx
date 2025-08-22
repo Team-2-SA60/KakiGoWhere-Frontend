@@ -94,7 +94,7 @@ const AdminCreatePlace = () => {
             return false;
         }
         return true;
-    };
+    }
 
     const handlePostSave = () => {
         navigate(`/admin/place/${place.id}`)

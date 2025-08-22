@@ -89,7 +89,7 @@ const AdminPlaceDetail = () => {
             setSaveLoading(false);
             return false;
         }
-    };
+    }
 
     async function uploadImage() {
         if (!imageFile) return true;
@@ -114,7 +114,7 @@ const AdminPlaceDetail = () => {
             return false;
         }
         return true;
-    };
+    }
 
     const handleConfirmModal = () => {
         setErrMsg("");
